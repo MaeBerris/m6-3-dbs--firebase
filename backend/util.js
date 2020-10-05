@@ -20,8 +20,19 @@ admin.initializeApp({
 
 const db = admin.database();
 
-const createDataBase = () => {
-  const extraInfoRef = db.ref("ExtraInfo");
-  extraInfoRef.push("this is extra info");
+const createDataBase = async () => {
+  // const createRooms = db.ref("Rooms");
+  // const createRoom1 = createRooms.child("Room2");
+  // createRoom1.set({
+  //   users: [{ username: "mae", points: 0 }],
+  //   phase: "loading",
+  // });
+  // return;
+
+  const RoomRef = db.ref("Rooms/Room2/users");
+  const userRef = await RoomRef.push({ name: "Joan Mama", points: 3000 });
+  setTimeout(() => {
+    userRef.update({ points: 5555, lavender: "smelly" });
+  }, 10000);
 };
 createDataBase();
